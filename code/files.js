@@ -35,6 +35,10 @@ function getReplaysPath() {
   return vscode.Uri.joinPath(storageUri, "replays").path;
 }
 
+function getRosettaPath() {
+  return vscode.Uri.joinPath(extensionUri, "apple-silicon").path.split(":").join("");
+}
+
 function getFileName(uri) {
   const path = uri.path.split("/");
 
@@ -220,6 +224,7 @@ module.exports = {
   copyReplayFile, getFileName, getIconsPath, getReplaysPath, readHtmlFile, readReplayFile,
   getBotsPath, listBots, extractBotZip,
   exitsMapFile, copyMapFile, getMapsPath, listMaps,
+  getRosettaPath,
   listFiles, saveFile
 };
 

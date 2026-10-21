@@ -3,6 +3,7 @@ const { execSync, spawnSync } = require("node:child_process");
 const Connection = require("./connection.js");
 const files = require("./files.js");
 const history = require("./history.js");
+const rosetta = require("./rosetta.js");
 const selection = require("./selection.js");
 const Speed = require("./speed.js");
 const stats = require("./stats.js");
@@ -54,14 +55,25 @@ class Game {
 
     execSync("docker rm -f starcraft");
 
-    const result = spawnSync("docker", ["run", "-d", "--name", "starcraft",
+    const args = ["run", "-d", "--name", "starcraft",
       "--platform", "linux/amd64",
       "-p", `${portForBot}:5000`, "-p", `${portToWatch}:5001`,
       "-v", files.getBotsPath().split(":").join("") + ":/bots",
       "-v", files.getReplaysPath().split(":").join("") + ":/replays",
-      "-v", files.getMapsPath().split(":").join("") + ":/StarCraftII/Maps",
-      "stephanzlatarev/starcraft"
-    ]);
+      "-v", files.getMapsPath().split(":").join("") + ":/StarCraftII/Maps"
+    ];
+
+    if (rosetta.isEnabled()) {
+      // Rosetta translates x86 atomics into ARM ones, which fault when the operand
+      // crosses a 16-byte boundary. The library redirects misaligned mutexes to
+      // aligned shadows, so that the game client doesn't crash while loading a map.
+      args.push("-e", `LD_PRELOAD=${rosetta.LIBRARY}`);
+      args.push("-v", `${files.getRosettaPath()}:${rosetta.DIRECTORY}:ro`);
+    }
+
+    args.push("stephanzlatarev/starcraft");
+
+    const result = spawnSync("docker", args);
 
     if (result.status) {
       const errorMessage = result.stderr.toString().trim();

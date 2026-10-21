@@ -23,8 +23,10 @@ You can click on the minimap to move the camera.
 
 The headless StarCraft II is built for linux/amd64 architecture.
 There are no known issues when running on Windows with Docker Desktop.
-On Mac with Apple silicon works with Docker VMM (See Docker Desktop > Settings > General > Virtual Machine Options)
-but doesn't work with Apple Virtualization framework using Rosetta for emulation.
+On Mac with Apple silicon works with Docker VMM (See Docker Desktop > Settings > General > Virtual Machine Options).
+Enabling Rosetta for x86_64/amd64 emulation makes the game run several times faster.
+The game client crashes while loading a map under Rosetta, so the extension loads a small compatibility library that prevents the crash.
+See [Apple Silicon](apple-silicon/README.md) for details.
 
 Two network ports must be available on the host machine. They can be configured in Settings under `StarCraft II for AI`. The default ports are:
 * 5000 - This is the port for your bot to connect to.

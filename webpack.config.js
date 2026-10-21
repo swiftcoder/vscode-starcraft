@@ -36,7 +36,8 @@ module.exports = {
         "package.json",
         "README.md",
         { from: "html", to: "html" },
-        { from: "icons", to: "icons" }
+        { from: "icons", to: "icons" },
+        { from: "apple-silicon", to: "apple-silicon" }
       ]
     })
   ]

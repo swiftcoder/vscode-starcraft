@@ -27,7 +27,7 @@ const ArenaMaps = require("./arena/maps.js");
 const ArenaMatches = require("./arena/matches.js");
 
 const CHECK_DOCKER_SERVER = {
-  darwin: "Check Docker Server on MacOS. Please, disable Rosetta emulation if on Apple Silicon.",
+  darwin: "Check Docker Server on MacOS. Enable Rosetta for x86_64 emulation on Apple Silicon for better performance.",
 };
 
 let activeContainer;

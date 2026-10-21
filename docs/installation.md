@@ -11,7 +11,7 @@ has_toc: false
 StarCraft II for AI requires:
 * Visual Studio Code - [Install Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
 * Docker - [Install Docker](https://docs.docker.com/get-started/get-docker/) and start it
-    * If on Apple Silicon, disable Rosetta for emulation. The headless game client doesn't work with it.
+    * If on Apple Silicon, enable Rosetta for x86_64/amd64 emulation (See Docker Desktop > Settings > General > Virtual Machine Options). The game runs several times faster with it, and the extension fixes a crash of the game client under Rosetta
 * StarCraft II - A headless game client is downloaded by StarCraft II for AI when watching a replay or starting a game at step "Download StarCraft II". If the step fails you can download the game client manually using `docker pull --platform linux/amd64 stephanzlatarev/starcraft` in a command prompt and troubleshoot connectivity issues
 
 # Install StarCraft II for AI in Visual Studio Code

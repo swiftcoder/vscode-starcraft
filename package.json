@@ -48,6 +48,16 @@
         "starcraft.arenaApiToken": {
           "description": "API token for the AI Arena. Get it from https://aiarena.net/profile/token/",
           "type": "string"
+        },
+        "starcraft.rosetta": {
+          "description": "Rosetta compatibility for the game client on Apple Silicon. Auto enables it on Apple Silicon Macs only.",
+          "type": "string",
+          "enum": [
+            "Auto",
+            "Enabled",
+            "Disabled"
+          ],
+          "default": "Auto"
         }
       }
     },
